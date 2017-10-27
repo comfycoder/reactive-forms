@@ -1,0 +1,18 @@
+<div class="stock-selector" [formGroup]="parent" class="form-inline">
+    <div formGroupName="selector">
+        <select class="form-control" formControlName="product_id" name="product_id" id="product_id">
+            <option value="">Select stock</option>
+            <option *ngFor="let product of products" [value]="product.id">
+                {{ product.name }}
+            </option>
+        </select>
+        <stock-counter [step]="10" [min]="10" [max]="1000" formControlName="quantity">
+        </stock-counter>
+        <button class="btn btn-primary" type="button" [disabled]="stockExists || notSelected" (click)="onAdd()">
+            Add stock
+        </button>
+        <div class="stock-selector__error" *ngIf="stockExists">
+            Item already exists in the stock
+        </div>
+    </div>
+</div>
